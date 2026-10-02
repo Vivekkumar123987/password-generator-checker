@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator & Strength Checker</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1><i class="fa-solid fa-shield-halved"></i> KeyGuard</h1>
+            <p>Secure Password Generator & Real-time Analyzer</p>
+        </header>
+
+        <!-- Main Display Box -->
+        <div class="output-container">
+            <input type="text" id="passwordInput" placeholder="Enter or generate password..." autocomplete="off">
+            <button id="copyBtn" title="Copy to Clipboard">
+                <i class="fa-regular fa-copy"></i>
+            </button>
+            <button id="generateBtn" class="primary-btn">
+                <i class="fa-solid fa-arrows-rotate"></i> Generate
+            </button>
+        </div>
+
+        <!-- Real-time Strength Meter -->
+        <div class="strength-card">
+            <div class="strength-header">
+                <span>Strength Level: <strong id="strengthLabel">Very Weak</strong></span>
+                <span id="entropyText">0 bits</span>
+            </div>
+            <div class="meter-bar">
+                <div id="meterFill"></div>
+            </div>
+            <div class="crack-time">
+                <i class="fa-solid fa-clock-rotate-left"></i> Estimated crack time: <span id="crackTimeText">Instant</span>
+            </div>
+        </div>
+
+        <!-- Customization Options -->
+        <div class="options-grid">
+            <!-- Length Slider -->
+            <div class="option-group full-width">
+                <div class="slider-header">
+                    <label for="lengthSlider">Password Length</label>
+                    <span id="lengthVal">16</span>
+                </div>
+                <input type="range" id="lengthSlider" min="4" max="64" value="16">
+            </div>
+
+            <!-- Toggles -->
+            <div class="option-group">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="includeUpper" checked>
+                    <span class="checkmark"></span>
+                    Uppercase (A-Z)
+                </label>
+            </div>
+
+            <div class="option-group">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="includeLower" checked>
+                    <span class="checkmark"></span>
+                    Lowercase (a-z)
+                </label>
+            </div>
+
+            <div class="option-group">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="includeNumbers" checked>
+                    <span class="checkmark"></span>
+                    Numbers (0-9)
+                </label>
+            </div>
+
+            <div class="option-group">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="includeSymbols" checked>
+                    <span class="checkmark"></span>
+                    Symbols (!@#$)
+                </label>
+            </div>
+
+            <div class="option-group full-width">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="excludeAmbiguous">
+                    <span class="checkmark"></span>
+                    Exclude Ambiguous (i, l, 1, L, o, 0, O)
+                </label>
+            </div>
+        </div>
+
+        <!-- Check List Requirements -->
+        <div class="checklist">
+            <div class="check-item" id="chk-length"><i class="fa-solid fa-circle-xmark"></i> Min 12 Characters</div>
+            <div class="check-item" id="chk-upper"><i class="fa-solid fa-circle-xmark"></i> Uppercase Letter</div>
+            <div class="check-item" id="chk-lower"><i class="fa-solid fa-circle-xmark"></i> Lowercase Letter</div>
+            <div class="check-item" id="chk-number"><i class="fa-solid fa-circle-xmark"></i> Number</div>
+            <div class="check-item" id="chk-symbol"><i class="fa-solid fa-circle-xmark"></i> Special Symbol</div>
+        </div>
+
+        <!-- History Drawer Toggle -->
+        <button id="historyToggleBtn" class="secondary-btn">
+            <i class="fa-solid fa-history"></i> Recent Passwords
+        </button>
+
+        <!-- History Container -->
+        <div id="historyBox" class="history-box hidden">
+            <h3>Recent Passwords</h3>
+            <ul id="historyList"></ul>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">Copied to clipboard!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
